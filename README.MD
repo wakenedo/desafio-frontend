@@ -8,17 +8,17 @@ Este projeto tem como objetivo criar uma interface interativa de estrutura de á
 
 Após o movimento, o nó 2.1 deve ser posicionado como filho do nó 1.1.1.
 
-![Exemplo](./image2.png)
+![Exemplo](./image3.png)
 
 ## Adição de Novos Nós
 
-Ao clicar no botão (+), deve aparecer uma opção para adicionar um novo nó, que deve ser posicionado exatamente onde o clique ocorreu.
+Ao clicar no botão (+), deve aparecer uma opção para adicionar um novo nó, que deve ser posicionado exatamente como filho do nó que o clique ocorreu.
 
 ![Exemplo](./image3.png)
 
 ## Restrição do Nó Principal
 
-O nó "start" não pode ser movido, pois é o nó principal da árvore.
+O nó "start" (azul escuro) não pode ser movido, pois é o nó principal da árvore.
 
 ## Estrutura
 
@@ -26,8 +26,11 @@ O design e a estrutura da interface são de sua escolha. Utilize a estrutura que
 
 ## Recursos Opcionais
 
-- Implementar um nó bloqueado (marcado visualmente) que não pode ser arrastado/movido diretamente para outra posição.
-- Caso de teste: Minimizar o grupo de nós. Observe o ícone de seta na árvore, que é responsável por minimizar todo o grupo de nós.
+- Implementar um nó bloqueado (deve ter um ícone indicando o bloqueio), que não pode ser arrastado/movido diretamente para outra posição.
+- Test case
+- Minimizar o grupo de nós. Observe o ícone de seta na árvore, que é responsável por minimizar todo o grupo de nós.
+
+![Exemplo](./image4.png)
 
 ## Requisitos
 
@@ -36,5 +39,5 @@ O design e a estrutura da interface são de sua escolha. Utilize a estrutura que
 
 ## Entrega
 
-Conclua o projeto em até 5 dias após receber este teste.
-Faça o upload do projeto no GitHub e envie o link por e-mail para daniel@botdesigner.io, com o assunto [Desenvolvedor React].
+- Conclua o projeto em até 5 dias após receber este teste.
+- Após concluido envie o seu teste neste link: https://forms.gle/SnBozP41a4uP5LkM9
