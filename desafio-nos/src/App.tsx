@@ -162,7 +162,6 @@ const App: React.FC = () => {
       return (
         <foreignObject width="100" height="100" x="-25" y="-25">
           <div
-            onClick={() => addNewNodeAtRootLevel()}
             style={{
               backgroundColor: '#2a53b1',
               color: 'white',
@@ -181,7 +180,6 @@ const App: React.FC = () => {
       return (
         <foreignObject width="100" height="100" x="-25" y="-25">
           <div
-            onClick={() => addNewNodeAtRootLevel()}
             style={{
               backgroundColor: '#2a53b1',
               color: 'white',
