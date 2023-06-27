@@ -1,0 +1,8 @@
+:global(.rd3t-link) {
+  stroke: #c6cffff8 !important;
+  fill: #f8f8f8f8;
+  stroke-width: 1.5px;
+  fill: none;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
