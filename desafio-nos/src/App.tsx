@@ -56,9 +56,13 @@ const App: React.FC = () => {
   const addNewNodeAtRootLevel = () => {
     const newNodeName = `Node.${data.children.length - 1}`;
     const newNode = { name: newNodeName, children: [] };
+    const plusPlusNodeName = `${newNodeName}++`;
+    const plusPlusNode = { name: plusPlusNodeName, children: [] };
+    newNode.children.push(plusPlusNode);
     data.children.splice(data.children.length - 1, 0, newNode);
     setData({ ...data });
   };
+
 
   const renderCustomNode = ({ nodeDatum }: TreeNodeProps) => {
     if (nodeDatum.name === 'Else') {
@@ -97,19 +101,29 @@ const App: React.FC = () => {
       );
     }
 
+    if (nodeDatum.name.endsWith('++')) {
+      const parentNodeName = nodeDatum.name.slice(0, -2); // Remove the '++' suffix
+      const parentNode = getAllNodesWithSameLevel(parentNodeName, data)[0];
+      const nodeIndex = parentNode.children.findIndex((child: Node) => child.name === nodeDatum.name);
+
+      return (
+        <foreignObject width="100" height="100" x="-50" y="-50">
+          <button
+            onClick={() => addNewNodeOnSameLevel(parentNodeName, true)}
+            style={{ backgroundColor: 'yellow', width: '100%', height: '100%' }}
+          >
+            {nodeIndex === parentNode.children.length - 1 ? '+' : '+'}
+          </button>
+        </foreignObject>
+      );
+    }
+
     return (
       <foreignObject width="100" height="100" x="-50" y="-50">
         <button
-          onClick={() => addNewNodeOnSameLevel(nodeDatum.name, false)}
-          style={{ backgroundColor: 'purple', color: 'white', width: '100%', height: '100%' }}
+          style={{ backgroundColor: 'purple', color: 'white', width: '100%', height: '100%', margin: '10px 0px 0px' }}
         >
           {nodeDatum.name}
-        </button>
-        <button
-          onClick={() => addNewNodeOnSameLevel(nodeDatum.name, true)}
-          style={{ backgroundColor: 'yellow', marginRight: '10px' }}
-        >
-          {nodeDatum.name}++
         </button>
       </foreignObject>
     );
@@ -126,12 +140,6 @@ const App: React.FC = () => {
             >
               Add Node to {node.name}
             </button>
-            <button
-              onClick={() => addNewNodeOnSameLevel(node.name, true)}
-              style={{ backgroundColor: 'yellow', marginRight: '10px' }}
-            >
-              Add Node++ to {node.name}'s branch
-            </button>
           </React.Fragment>
         )}
         {node.children && node.children.length > 0 && (
@@ -139,9 +147,42 @@ const App: React.FC = () => {
             {node.children.map((childNode) => renderTree([childNode]))}
           </div>
         )}
+        {!node.children && node.name !== 'Start' && (
+          <div style={{ marginLeft: '20px' }}>
+            <button
+              onClick={() => addNewNodeOnSameLevel(node.name, false)}
+              style={{ backgroundColor: 'green', marginRight: '10px' }}
+            >
+              Add Node to {node.name}
+            </button>
+            <button
+              onClick={() => addNewNodeOnSameLevel(node.name, true)}
+              style={{ backgroundColor: 'yellow', marginRight: '10px' }}
+            >
+              Add Node++ to {node.name}'s branch
+            </button>
+          </div>
+        )}
+        {!node.children && node.name === 'Start' && (
+          <div style={{ marginLeft: '20px' }}>
+            <button
+              onClick={addNewNodeAtRootLevel}
+              style={{ backgroundColor: 'yellow', marginRight: '10px' }}
+            >
+              Add Node
+            </button>
+            <button
+              onClick={() => addNewNodeOnSameLevel(node.name, true)}
+              style={{ backgroundColor: 'yellow', marginRight: '10px' }}
+            >
+              Add Node++ to {node.name}'s branch
+            </button>
+          </div>
+        )}
       </div>
     );
   };
+
 
   const renderTree = (nodes: Node[]) => {
     return nodes.map((node: Node) => (
