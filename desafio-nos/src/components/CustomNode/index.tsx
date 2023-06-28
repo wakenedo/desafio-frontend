@@ -33,7 +33,7 @@ const CustomNode: React.FC<CustomNodeProps> = ({ nodeDatum, toggleNode, data, se
 
   if (nodeDatum.name === '+') {
     return (
-      <foreignObject width="100" height="100" x="" y="-15">
+      <foreignObject width="100" height="100" x="0" y="-15">
         <button
           onClick={() => addNewNodeAtRootLevel(data, setData)} // Updated onClick handler
           style={{
@@ -96,7 +96,7 @@ const CustomNode: React.FC<CustomNodeProps> = ({ nodeDatum, toggleNode, data, se
     const nodeIndex = parentNode.children?.findIndex((child: Node) => child.name === nodeDatum.name);
 
     return (
-      <foreignObject width="100" height="100" x="" y="-15">
+      <foreignObject width="100" height="100" x="0" y="-15">
         <button
           onClick={() => addNewNodeOnSameLevel(parentNodeName, true, data, setData)}
           style={{

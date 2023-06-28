@@ -30,6 +30,7 @@ Alguns nós devem poder se excluir, e no caso os nós sem filhos pode ser exclu�
 - Estilização (Nós e 'Galhos') 
 - Nós deletáveis
 - Estrutura de ponteiros
+- Minimizar e Maximizar 'Galhos' (Bug)
 
 # V6 Preview Features 🔎
 
