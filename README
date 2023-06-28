@@ -1,0 +1,17 @@
+# Vite + React Project
+
+This is a Vite project.
+
+## Installing Dependencies
+react-d3-tree
+
+cd desafio-nos
+npm install
+
+## Running the Project
+
+npm run dev
+
+
+
+
