@@ -1,17 +1,49 @@
-# Vite + React Project
+# Node-Poiter-Tree V5 👍
+## Vite + React Project
 
 This is a Vite project.
 
-## Installing Dependencies
+## Dependencies
 react-d3-tree
-
-cd desafio-nos
-npm install
-
+## Installing Dependencies
+- cd desafio-nos
+- npm install
 ## Running the Project
 
-npm run dev
+- npm run dev
+
+
+# Desafio 🥇
+
+Desenvolver uma arvore de nós com uma estrutura de apontadores, os nós devem ser adicionados através de um ponteiro, os 'galhos' podem ser minimizados.
+
+Nós como o start e o else, são estáticos. Não podem ser removidos, não geram outros nós são como a root e o fechamento da arvore.
+
+Alguns nós devem poder se excluir, e no caso os nós sem filhos pode ser excluídos.
+
+
+# V5 Features 💯
+
+- Intuitive Structure
+- Tipagem Segura e Cobertura de tipagem
+- Nós dinamicos
+- Estilização (Nós e 'Galhos') 
+- Nós deletáveis
+- Estrutura de ponteiros
+
+# V6 Preview Features 🔎
+
+- Nós arrastaveis
+- 'Galhos' receptores
+- Correção de bugs (Minimizar e Maximizar Corretamente)
+- Test Cases
+- Implementar Nós bloqueados 
 
 
 
+# Sobre o desafio 🥇
+
+Foi muito interessante o desafio, nunca tinha trabalhado em um projeto desse tipo, acabei utilizando uma biblioteca que eu não conhecia e acabei gostando muito que foi a react-d3-tree.
+
+Bem completa, ainda estou aprendendo sobre a biblioteca e foi interessante aplica-la para desenvolver o teste.  
 
