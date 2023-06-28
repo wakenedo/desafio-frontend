@@ -27,7 +27,7 @@ const TreeNode: React.FC<TreeNodeProps> = ({ node, data, setData }) => {
       )}
       {!isCollapsed && node.children && node.children.length > 0 && (
         <div style={{ marginLeft: '20px' }}>
-          {node.children.map((childNode, childIndex) => (
+          {node.children.map((childNode: Node, childIndex: number) => (
             <div key={childIndex} style={{ display: isCollapsed ? 'none' : 'block' }}>
               <TreeNode node={childNode} data={data} setData={setData} />
             </div>

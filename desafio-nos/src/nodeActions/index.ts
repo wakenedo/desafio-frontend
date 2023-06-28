@@ -10,7 +10,7 @@ export const deleteNode = (
   const updatedData = { ...data };
   const fatherNode = findFatherNode(nodeName, updatedData);
   if (fatherNode) {
-    const targetNodeIndex = fatherNode.children.findIndex((child) => child.name === nodeName);
+    const targetNodeIndex = fatherNode.children.findIndex((child: Node) => child.name === nodeName);
     if (targetNodeIndex !== -1) {
       fatherNode.children.splice(targetNodeIndex, 1);
       if (fatherNode.children.length === 0) {
@@ -81,7 +81,7 @@ export const addNewNodeAtRootLevel = (data: Node, setData: React.Dispatch<React.
 export const toggleNode = (node: Node, data: Node, setData: React.Dispatch<React.SetStateAction<Node>>) => {
   node.collapsed = !node.collapsed;
   if (node.children && node.children.length > 0) {
-    node.children.forEach((childNode) => {
+    node.children.forEach((childNode: Node) => {
       setCollapsedState(childNode, node.collapsed);
     });
   }

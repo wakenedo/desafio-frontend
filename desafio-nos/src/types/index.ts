@@ -1,7 +1,7 @@
 export interface Node {
   name: string;
-  children?: Node[];
-  collapsed?: boolean;
+  children?: Node[] | any;
+  collapsed?: boolean | any;
   immutable?: boolean;
 }
 

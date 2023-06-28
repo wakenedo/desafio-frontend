@@ -2,9 +2,11 @@ import React from 'react';
 
 import { Node, TreeNodeProps } from '../../types';
 import { getAllNodesWithSameLevel } from '../../helpers/treeHelpers';
-import { addNewNodeAtRootLevel, addNewNodeOnSameLevel, deleteNode, toggleNode } from '../../nodeActions';
+import { addNewNodeAtRootLevel, addNewNodeOnSameLevel, deleteNode } from '../../nodeActions';
 
 interface CustomNodeProps extends TreeNodeProps {
+  nodeDatum: any
+  toggleNode: (nodeDatum: any) => void;
   data: Node; // The data prop
   setData: React.Dispatch<React.SetStateAction<Node>>; // The setData prop
 }
@@ -27,13 +29,6 @@ const CustomNode: React.FC<CustomNodeProps> = ({ nodeDatum, toggleNode, data, se
     height: '50%',
     borderRadius: '50%',
     margin: '30px 30px',
-  };
-
-  const iconStyle = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
   };
 
   if (nodeDatum.name === '+') {
@@ -140,7 +135,12 @@ const CustomNode: React.FC<CustomNodeProps> = ({ nodeDatum, toggleNode, data, se
                 {nodeDatum.name}
               </div>
               {nodeDatum.collapsed ? (
-                <span className="icon" style={iconStyle}>
+                <span className="icon" style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                }}>
                   {collapsedIcon}
                 </span>
               ) : null}

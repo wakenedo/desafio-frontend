@@ -35,7 +35,7 @@ export const setCollapsedState = (node: Node, collapsed: boolean) => {
   node.collapsed = collapsed;
 
   if (node.children && node.children.length > 0) {
-    node.children.forEach((childNode) => setCollapsedState(childNode, collapsed));
+    node.children.forEach((childNode: Node) => setCollapsedState(childNode, collapsed));
   }
 };
 
