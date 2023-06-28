@@ -79,7 +79,7 @@ export const addNewNodeAtRootLevel = (data: Node, setData: React.Dispatch<React.
 };
 
 export const toggleNode = (node: Node, data: Node, setData: React.Dispatch<React.SetStateAction<Node>>) => {
-  node.collapsed = !node.collapsed;
+  node.collapsed = !node.collapsed as boolean;
   if (node.children && node.children.length > 0) {
     node.children.forEach((childNode: Node) => {
       setCollapsedState(childNode, node.collapsed);
@@ -87,3 +87,4 @@ export const toggleNode = (node: Node, data: Node, setData: React.Dispatch<React
   }
   setData({ ...data });
 };
+
