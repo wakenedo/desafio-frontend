@@ -6,6 +6,7 @@ interface Node {
   name: string;
   children?: Node[];
   collapsed?: boolean;
+  immutable?: boolean;
 }
 
 const initialData: Node = {
@@ -24,13 +25,34 @@ const initialData: Node = {
 const App: React.FC = () => {
   const [data, setData] = useState<Node>(initialData);
 
+  const deleteNode = (nodeName: string) => {
+    const updatedData = { ...data };
+    deleteNodeFromTree(nodeName, updatedData);
+    setData(updatedData);
+  };
+
+  const deleteNodeFromTree = (nodeName: string, node: Node) => {
+    if (node.children && node.children.length > 0) {
+      node.children = node.children.filter((child: Node) => child.name !== nodeName);
+      node.children.forEach((child: Node) => {
+        if (child.children && child.children.length === 1 && child.children[0].name === nodeName) {
+          // Remove the father node associated with the targeted node
+          node.children = node.children.filter((subChild: Node) => subChild.name !== child.name);
+        } else {
+          deleteNodeFromTree(nodeName, child);
+        }
+      });
+    }
+  };
+
+
   const addNewNodeOnSameLevel = (nodeName: string, addPlusPlus: boolean) => {
     if (nodeName === 'Start') return;
 
     const parentNodes = getAllNodesWithSameLevel(nodeName, data);
 
     parentNodes.forEach((parentNode: Node) => {
-      const newNodeIndex = parentNode.children.length;
+      const newNodeIndex = parentNode.children?.length;
       const newNodeName = `${nodeName} ${newNodeIndex}`;
       const fatherNodeName = `${newNodeName}FatherNode`;
 
@@ -45,8 +67,8 @@ const App: React.FC = () => {
         collapsed: true,
       };
 
-      fatherNode.children.push(newNode);
-      parentNode.children.push(fatherNode);
+      fatherNode.children?.push(newNode);
+      parentNode.children?.push(fatherNode);
 
       if (addPlusPlus) {
         const plusPlusNodeName = `${newNodeName}++`;
@@ -55,7 +77,7 @@ const App: React.FC = () => {
           children: [],
           collapsed: true,
         };
-        newNode.children.push(plusPlusNode);
+        newNode.children?.push(plusPlusNode);
       }
     });
 
@@ -87,8 +109,8 @@ const App: React.FC = () => {
       collapsed: true,
     };
 
-    fatherNode.children.push(newNode);
-    data.children.unshift(fatherNode);
+    fatherNode.children?.push(newNode);
+    data.children?.unshift(fatherNode);
 
     setData({ ...data });
   };
@@ -158,6 +180,7 @@ const App: React.FC = () => {
         </foreignObject>
       );
     }
+
     if (nodeDatum.name === 'Start') {
       return (
         <foreignObject width="100" height="100" x="-25" y="-25">
@@ -165,13 +188,13 @@ const App: React.FC = () => {
             style={{
               backgroundColor: '#2a53b1',
               color: 'white',
-              width: '60%',
-              height: '60%',
+              width: '50%',
+              height: '50%',
               borderRadius: '50%',
               margin: '0px',
             }}
           >
-            <div style={{ fontSize: '17px', textAlign: 'center', textTransform: 'uppercase', paddingTop: '18px', fontWeight: 'bold' }}>Start</div>
+            <div style={{ fontSize: '14px', textAlign: 'center', textTransform: 'uppercase', paddingTop: '15px', fontWeight: 'bold' }}>Start</div>
           </div>
         </foreignObject>
       );
@@ -183,22 +206,24 @@ const App: React.FC = () => {
             style={{
               backgroundColor: '#2a53b1',
               color: 'white',
-              width: '60%',
-              height: '60%',
+              width: '50%',
+              height: '50%',
               borderRadius: '50%',
               margin: '0px',
             }}
           >
-            <div style={{ fontSize: '17px', textAlign: 'center', textTransform: 'uppercase', paddingTop: '18px', fontWeight: 'bold' }}>Else</div>
+            <div style={{ fontSize: '14px', textAlign: 'center', textTransform: 'uppercase', paddingTop: '15px', fontWeight: 'bold' }}>Else</div>
           </div>
         </foreignObject>
       );
     }
 
+
+
     if (nodeDatum.name.endsWith('++')) {
       const parentNodeName = nodeDatum.name.slice(0, -2);
       const parentNode = getAllNodesWithSameLevel(parentNodeName, data)[0];
-      const nodeIndex = parentNode.children.findIndex((child: Node) => child.name === nodeDatum.name);
+      const nodeIndex = parentNode.children?.findIndex((child: Node) => child.name === nodeDatum.name);
 
       return (
         <foreignObject width="100" height="100" x="" y="-15">
@@ -224,6 +249,24 @@ const App: React.FC = () => {
 
     const isFatherNode = nodeDatum.name.includes('FatherNode');
     const collapsedIcon = nodeDatum.collapsed ? '>' : '<';
+
+    if (nodeDatum.children && nodeDatum.children.length === 0) {
+      return (
+        <g>
+          {isFatherNode && (
+            <foreignObject width="100" height="100" x="-50" y="-50">
+              <button
+                onClick={() => deleteNode(nodeDatum.name)} // Call deleteNode function on button click
+                style={{ backgroundColor: 'red', color: 'white', borderRadius: '50%', border: '0px', width: '30%', height: '30%' }}
+              >
+                Delete
+              </button>
+            </foreignObject>
+          )}
+
+        </g>
+      );
+    }
 
     return (
       <g>
@@ -258,11 +301,21 @@ const App: React.FC = () => {
                 <img style={{
                   width: '18px', margin: '13px 19px'
                 }} src="https://i.ibb.co/Dwrkr0j/Group-251.png" alt="" />
+                {!isFatherNode && nodeDatum.children && nodeDatum.children.length === 1 ? (
+                  <button
+                    onClick={() => deleteNode(nodeDatum.name)} // Call deleteNode function on button click
+                    style={{ cursor: 'pointer', background: 'transparent', border: '0px', width: '20%', height: '20%', position: 'absolute', fontSize: '12px', margin: '-6px 35px' }}
+                  >
+                    <img style={{ width: '15px' }} src="https://i.ibb.co/BfYJTBz/Group-252.png" alt="" />
+                  </button>
+                ) : null}
               </div>
+
+
             </div>
           </foreignObject>
         )}
-      </g>
+      </g >
     );
   };
 
