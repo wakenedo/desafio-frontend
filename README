@@ -34,9 +34,9 @@ Alguns nós devem poder se excluir, e no caso os nós sem filhos pode ser exclu�
 
 # V6 Preview Features 🔎
 
+- Correção de bugs (Minimizar e Maximizar Corretamente)
 - Nós arrastaveis
 - 'Galhos' receptores
-- Correção de bugs (Minimizar e Maximizar Corretamente)
 - Test Cases
 - Implementar Nós bloqueados 
 
